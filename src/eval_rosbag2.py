@@ -27,9 +27,9 @@ rate_d_r_dds_product = gc.get_rate_d_r_dds_product()
 repeat_count = 1
 num_of_repeat = gc.get_num_of_repeat()
 
-def exec_run_experiment(nd_mcs_spp,topic,l_param):
+def exec_run_perf_test_and_rosbag2_record(nd_mcs_spp,topic,l_param):
     """
-    Run run_experiment.py, and launch perf_test and rosbag2 record.
+    Run run_perf_test_and_rosbag2_record.py, and launch perf_test and rosbag2 record.
 
     Parameters
     ----------
@@ -41,9 +41,9 @@ def exec_run_experiment(nd_mcs_spp,topic,l_param):
         Index of rate_d_r_dds_product indicating the parameters to be executed.
     """
 
-    #Pass parameters to be executed and output results storage location to run_experiment.py 
+    #Pass parameters to be executed and output results storage location to run_perf_test_and_rosbag2_record.py 
     #Manipulate output results with grep to output timestamps only
-    experiment_cmd = f"python3 run_experiment.py {nd_mcs_spp} {topic} {l_param} {time_output_dir} | grep qqq.*"
+    experiment_cmd = f"python3 run_perf_test_and_rosbag2_record.py {nd_mcs_spp} {topic} {l_param} {time_output_dir} | grep qqq.*"
     with open(f'{time_output_dir}/pub_time_before_del.txt','w') as f:
         subprocess.run(experiment_cmd,shell=True,stdout=f,encoding='UTF-8', universal_newlines=True)
 
@@ -139,11 +139,11 @@ for h in range(len(nd_mcs_spp_product)): # nd,mcs,spp
 
             #----------データを出力するパス設定----------
             #時刻データを出力するパス
-            time_output_dir = f"{time_output_root_dir}/nd={nd}:mcs={mcs}:spp={spp}/{topic}:rate={rate}/QoS={durability},{reliability}:DDS={dds}"
-            # time_output_dir = f"./time_output/nd={nd}:mcs={mcs}:spp={spp}/{topic}:rate={rate}/QoS={durability},{reliability}:DDS={dds}"
+            time_output_dir = f"{time_output_root_dir}/nd={nd}_mcs={mcs}_spp={spp}/{topic}_rate={rate}/QoS={durability},{reliability}_DDS={dds}"
+            # time_output_dir = f"./time_output/nd={nd}_mcs={mcs}_spp={spp}/{topic}_rate={rate}/QoS={durability},{reliability}_DDS={dds}"
             os.makedirs(time_output_dir,exist_ok=True)
             #メッセージロスの数を出力するファイルパス
-            m_loss_output_dir = f'{time_output_root_dir}/nd={nd}:mcs={mcs}:spp={spp}/number_of_message_loss'
+            m_loss_output_dir = f'{time_output_root_dir}/nd={nd}_mcs={mcs}_spp={spp}/number_of_message_loss'
             m_loss_output_path = f"{m_loss_output_dir}/{topic}.txt"
             os.makedirs(m_loss_output_dir,exist_ok=True)
             m_loss_dist_output_dir = f"{m_loss_output_dir}/dist/{dds},{rate},{reliability},{durability}"
@@ -154,7 +154,7 @@ for h in range(len(nd_mcs_spp_product)): # nd,mcs,spp
                 #----------評価関数を実行----------
                 print(f"-----Parameter execution ({k+1})-----\ncommunication:[{dds},{reliability},{durability}]\nperf_test:[{rate},{topic}]\nrosbag2 record:{nd_mcs_spp_param}")
                 print("-----Execute perf_test,rosbag2 record-----")
-                exec_run_experiment(h,i,j)
+                exec_run_perf_test_and_rosbag2_record(h,i,j)
                 print("-----Create a file containing timestamps.-----")
                 create_perf_test_time_txt()
                 create_record_time_txt()

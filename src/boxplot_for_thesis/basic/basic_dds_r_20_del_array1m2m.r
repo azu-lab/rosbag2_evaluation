@@ -1,18 +1,16 @@
 ## read file data
-#recordオプション=default,rate=20,d=volatile
-#topic,dds,reliabilityが変数
 
-d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array1k:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array4k:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array16k:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array32k:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d5 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array64k:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d6 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array256k:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d7 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array1m:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d8 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array2m:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d9 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct256:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d10 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct4k:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d11 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct32k:rate=20/QoS=volatile,best_effort:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array1k_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array4k_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array16k_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array32k_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d5 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array64k_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d6 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array256k_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d7 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array1m_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d8 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array2m_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d9 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct256_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d10 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct4k_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d11 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct32k_rate=20/QoS=volatile,best_effort_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
 
 d1 <- d1[10:1990, ]
 d2 <- d2[10:1990, ]
@@ -28,17 +26,17 @@ d11 <- d11[10:1990, ]
 
 data1 <- cbind(d1,d2,d3,d4,d5,d6,d9,d10,d11)
 
-d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Array1k:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Array4k:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Array16k:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Array32k:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d5 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Array64k:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d6 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Array256k:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d7 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Array1m:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d8 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Array2m:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d9 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Struct256:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d10 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Struct4k:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d11 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false:mcs=default:spp=default/Struct32k:rate=20/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Array1k_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Array4k_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Array16k_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Array32k_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d5 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Array64k_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d6 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Array256k_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d7 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Array1m_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d8 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Array2m_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d9 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Struct256_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d10 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Struct4k_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d11 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output2/nd=false_mcs=default_spp=default/Struct32k_rate=20/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
 
 d1 <- d1[10:1990, ]
 d2 <- d2[10:1990, ]
@@ -54,17 +52,17 @@ d11 <- d11[10:1990, ]
 
 data2 <- cbind(d1,d2,d3,d4,d5,d6,d9,d10,d11)
 
-d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array1k:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array4k:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array16k:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array32k:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d5 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array64k:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d6 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array256k:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d7 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array1m:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d8 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array2m:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d9 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct256:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d10 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct4k:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d11 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct32k:rate=20/QoS=volatile,best_effort:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array1k_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array4k_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array16k_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array32k_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d5 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array64k_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d6 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array256k_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d7 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array1m_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d8 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array2m_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d9 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct256_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d10 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct4k_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d11 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct32k_rate=20/QoS=volatile,best_effort_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
 
 d1 <- d1[10:1990, ]
 d2 <- d2[10:1990, ]
@@ -80,17 +78,17 @@ d11 <- d11[10:1990, ]
 
 data3 <- cbind(d1,d2,d3,d4,d5,d6,d9,d10,d11)
 
-d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array1k:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array4k:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array16k:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array32k:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d5 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array64k:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d6 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array256k:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d7 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array1m:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d8 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Array2m:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d9 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct256:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d10 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct4k:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
-d11 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false:mcs=default:spp=default/Struct32k:rate=20/QoS=volatile,reliable:DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array1k_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array4k_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array16k_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array32k_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d5 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array64k_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d6 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array256k_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d7 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array1m_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d8 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Array2m_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d9 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct256_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d10 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct4k_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
+d11 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output/nd=false_mcs=default_spp=default/Struct32k_rate=20/QoS=volatile,reliable_DDS=rmw_fastrtps_cpp/jitter_ms.txt")
 
 d1 <- d1[10:1990, ]
 d2 <- d2[10:1990, ]
@@ -132,7 +130,7 @@ comparison_BoxPlot <- function(all_data) {
         xlim = range(2:(ncol(data1) * 4+2)), # define large x-axis
         ylim = c(-0.13, 0.13), # y-axis data span
         font.axis = 15,                                # axis font
-        cex.axis = 1.8,                       #y軸メモリの文字サイズ
+        cex.axis = 1.8,                       # y-axis font size
         xaxt = "n"                                    # no x-axis
     )
     ## draw vertical line

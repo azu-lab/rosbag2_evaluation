@@ -60,3 +60,10 @@ Open a new terminal
 ```
 [1]:https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
 [2]:https://gitlab.com/ApexAI/performance_test
+
+## Visualize
+1.Message loss
+
+2.Jitter
+
+Jitter of rosbag2 is visualizing by R script.

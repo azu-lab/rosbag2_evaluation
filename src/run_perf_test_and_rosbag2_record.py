@@ -1,17 +1,3 @@
-# Copyright 2017 Apex.AI, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import os
 import signal
 import subprocess
@@ -124,11 +110,6 @@ class Instance:
         print('*********record_command**********')
         print(record_cmd)
         print('*******************')
-        #record開始(envコマンドを使用するためコマンド全体を''で分割)
-        # record_process = subprocess.Popen(['ros2', 'bag', 'record',
-        #     topic_name, '-o', bagfile_path,'--qos-profile-overrides-path',record_qos_cmd,
-        #     record_nd_cmd,'--max-cache-size',record_mcs_cmd,base_cpp_cmd,record_spp_cmd],shell=True)
-        # record_process = subprocess.Popen(record_cmd,shell=True)
 
         return command + ' ' + fixed_args + dyn_args + pubs_args
 
