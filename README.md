@@ -58,12 +58,17 @@ colcon build
 Open a new terminal
 ```
 ```
-[1]:https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
-[2]:https://gitlab.com/ApexAI/performance_test
+
 
 ## Visualize
 1.Message loss
 
 2.Jitter
 
-Jitter of rosbag2 is visualizing by R script.
+Jitter of rosbag2 is visualizing by R scripts (for exmaple, "rosbag2_evaluation/src/boxplot_for_thesis/basic/basic_dds_r_20.r").
+If you want to run R scripts in this package, you must change output data paths refferenced in R scripts.
+Output datas by rosbag2_evaluation are placed in [GoogleDrive][3].
+
+[1]:https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
+[2]:https://gitlab.com/ApexAI/performance_test
+[3]:https://drive.google.com/file/d/1rf3QdKASaFHtoBIjgvooUg3sdyv96l7A/view?usp=sharing

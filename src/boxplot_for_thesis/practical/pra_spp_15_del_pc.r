@@ -1,11 +1,9 @@
 ## read file data
-#recordオプション=default,rate=20,d=volatile
-#topic,dds,reliabilityが変数
 
-d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false:mcs=default:spp=default/RadarDetection:rate=15/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false:mcs=default:spp=default/Range:rate=15/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false:mcs=default:spp=default/NavSatFix:rate=15/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false:mcs=default:spp=default/RadarTrack:rate=15/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false_mcs=default_spp=default/RadarDetection_rate=15/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false_mcs=default_spp=default/Range_rate=15/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false_mcs=default_spp=default/NavSatFix_rate=15/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false_mcs=default_spp=default/RadarTrack_rate=15/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
 
 
 d1 <- d1[10:1990, ]
@@ -15,10 +13,10 @@ d4 <- d4[10:1990, ]
 
 data1 <- cbind(d1,d2,d3,d4)
 
-d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false:mcs=default:spp=resilient/RadarDetection:rate=15/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false:mcs=default:spp=resilient/Range:rate=15/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false:mcs=default:spp=resilient/NavSatFix:rate=15/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
-d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false:mcs=default:spp=resilient/RadarTrack:rate=15/QoS=volatile,reliable:DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d1 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false_mcs=default_spp=resilient/RadarDetection_rate=15/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d2 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false_mcs=default_spp=resilient/Range_rate=15/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d3 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false_mcs=default_spp=resilient/NavSatFix_rate=15/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
+d4 <- read.table("/home/ryuko/perf_test_ws/src/performance_test/performance_test/helper_scripts/time_output_pra_j/nd=false_mcs=default_spp=resilient/RadarTrack_rate=15/QoS=volatile,reliable_DDS=rmw_cyclonedds_cpp/jitter_ms.txt")
 
 d1 <- d1[10:1990, ]
 d2 <- d2[10:1990, ]
@@ -54,7 +52,7 @@ comparison_BoxPlot <- function(all_data) {
         xlim = range(2:(ncol(data1) * 2+2)), # define large x-axis
         ylim = c(-0.05, 0.05), # y-axis data span
         font.axis = 15,                                # axis font
-        cex.axis = 1.8,                       #y軸メモリの文字サイズ
+        cex.axis = 1.8,                       # y-axis font size
         xaxt = "n"                                    # no x-axis
     )
     ## draw vertical line

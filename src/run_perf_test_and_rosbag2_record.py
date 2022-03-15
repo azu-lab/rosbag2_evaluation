@@ -37,7 +37,7 @@ record_nd_cmd = ""
 record_mcs_cmd = ""
 base_spp_cmd = ""
 record_spp_cmd = ""
-record_qos_cmd = f"record_qos_override/{topic}/{record_qos_r}:{record_qos_d}.yaml"
+record_qos_cmd = f"record_qos_override/{topic}/{record_qos_r}_{record_qos_d}.yaml"
 record_cmd = ""
 
 if no_discovery == "true":
