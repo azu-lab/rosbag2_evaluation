@@ -1,9 +1,9 @@
 # rosbag2_evaluation
 
 The rosbag2_evaluation tool tests message loss and jitter of rosbag2.
-It uses ROS 2 galactic and performance_test tool for evaluation.
+It uses ROS 2 galactic and performance_test tool (by Apex.AI) for evaluation.
 
-Some scripts have been modified to fit this tool.
+Some scripts of ROS 2 galactic and performance_test have been modified to fit this tool.
 Therefore, they need to be rewritten from the original scripts.
 
 ## Requirements
