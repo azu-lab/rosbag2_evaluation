@@ -1,10 +1,10 @@
 # rosbag2_evaluation
 
-The rosbag2_evaluation tool tests message loss and jitter of rosbag2.
+The rosbag2_evaluation package tests message loss and jitter of rosbag2.
 It uses ROS 2 galactic and performance_test tool (by Apex.AI) for evaluation.
 
-Some scripts of ROS 2 galactic and performance_test have been modified to fit this tool.
-Therefore, they need to be rewritten from the original scripts.
+Some scripts of ROS 2 galactic and performance_test have been modified to fit this package.
+Therefore, you need to rewrite from the original scripts to modified scripts.
 
 ## Requirements
 - [ROS 2 galactic][1] (Ubuntu 20.04)
@@ -53,10 +53,19 @@ colcon build
 ```
 
 ## Evaluation
-1.Set environment variables
+1.Set evaluation parameters
 
-Open a new terminal
+Open a yaml file ("rosbag2_evaluation/src/rosbag2_evaluation_parameters.yaml") and set parameters enclosed in [].
+- **fixed** : don't change these parameters.
+- **free** : you can set an integer value you like.
+- **"free",...** : you can set some interger values you like (for dds, you can set RMW_IMPLEMENTATION parameters. This package implements only rmw_cyclonedds_cpp and rmw_fastrtps_cpp).
+ 
+2.Start rosbag2_evaluation
+
+
 ```
+cd /rosbag2_evaluation/src
+python3 eval_rosbag2.py
 ```
 
 
@@ -67,7 +76,9 @@ Open a new terminal
 
 Jitter of rosbag2 is visualizing by R scripts (for exmaple, "rosbag2_evaluation/src/boxplot_for_thesis/basic/basic_dds_r_20.r").
 If you want to run R scripts in this package, you must change output data paths refferenced in R scripts.
+
 Output datas by rosbag2_evaluation are placed in [GoogleDrive][3].
+Output datas must be placed in "rosbag2_evaluation/src/".
 
 [1]:https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
 [2]:https://gitlab.com/ApexAI/performance_test

@@ -1,24 +1,24 @@
 rosbag2_evaluation:
   ros__parameters:
-    dds: ["rmw_cyclonedds_cpp"] # ["rmw_cyclonedds_cpp","rmw_fastrtps_cpp"]
-    repeat: 1
+    dds: ["rmw_cyclonedds_cpp"] # ["rmw_cyclonedds_cpp","rmw_fastrtps_cpp",...]
+    repeat: 1 # free
     perf_test_parameters:
       topics: ["Array1k"] # you can set the below configurations
-      rate: ["30"] 
+      rate: ["30"] # ["free",...]
       reliability: ["reliable"] # fixed
       durability: ["volatile"] # fixed
-      number_of_publish: 100
+      number_of_publish: 100 # free
     rosbag2_parameters:
       record:
-        no_discovery: ["false"] #["true","false"]
-        max_cache_size: ["0"] #["0","guide","default","209715200" ] #default=100mebibytes=104857600bytes,209715200
-        storage_preset_profile: ["default"] #["default","resilient"] 
+        no_discovery: ["false"] # ["true","false"]
+        max_cache_size: ["default"] # ["guide","default","free",... ] default=100MiB=104857600bytes
+        storage_preset_profile: ["default"] # ["default","resilient"] 
         qos:
-          reliability: ["reliable"]
-          durability: ["volatile"]
+          reliability: ["reliable"] # ["best_effort","reliable"]
+          durability: ["volatile"] # ["volatile","transient"]
       play:
-        read_ahead_queue_size: ["10485760"] #default=1000 [1MiB,10MiB,100MiB] = ["1048576","10485760","104857600"]
-        rate: ["default"] #fixed
+        read_ahead_queue_size: ["10485760"] # ["default","free",...] default=1000bytes
+        rate: ["default"] # ["default","free",...]
         qos:
           reliability: ["reliable"] # fixed
           durability: ["transient"] # fixed
@@ -28,5 +28,3 @@ rosbag2_evaluation:
 # "Struct256", "Struct4k","Struct32k", 
 # "PointCloud512k", "PointCloud1m", "PointCloud2m","PointCloud4m", 
 # "Range", "NavSatFix", "RadarDetection", "RadarTrack"
-#"Array1k", "Array4k", "Array16k", "Array32k", "Array64k", "Array256k","Array1m", "Array2m","Struct256", "Struct4k","Struct32k"
-# "RadarDetection","Range", "NavSatFix",  "RadarTrack","PointCloud512k", "PointCloud1m", "PointCloud2m","PointCloud4m"
