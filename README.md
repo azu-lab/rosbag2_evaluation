@@ -16,7 +16,7 @@ Therefore, they need to be rewritten from the original scripts.
 git clone https://github.com/azu-lab/rosbag2_evaluation.git
 ```
 
-2.Rewrite .cpp script from original script
+2.Rewrite some scripts from original scripts
 
 ROS 2 galactic
 - "ros2_galactic/src/ros2/rosbag2/rosbag2_transport/src/rosbag2_transport/player.cpp" -> "rosbag2_evaluation/cpp_scripts/player.cpp" 
@@ -24,6 +24,7 @@ ROS 2 galactic
 performance_test
 - "perf_test_ws/src/performance_test/performance_test/src/communication_abstractions/rclcpp_communicator.hpp" -> "rosbag2_evaluation/cpp_scripts/rclcpp_communicator.hpp"
 - "perf_test_ws/src/performance_test/performance_test/src/outputs/stdout_output.cpp" -> "rosbag2_evaluation/cpp_scripts/stdout_output.cpp"
+
 ## Build
 1.Set environment variables
 ```
@@ -31,10 +32,14 @@ source /ros2_galactic/install/setup.bash
 source /perf_test_ws/install/setup.bash
 ```
 2.Build
+
+Build the performance_test
 ```
 cd /perf_test_ws
 colcon build
 ```
+
+Build ROS 2 galactic
 ```
 cd /ros2_galactic
 ```
