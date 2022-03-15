@@ -10,7 +10,8 @@ $git clone https://github.com/azu-lab/rosbag2_evaluation.git
 ```
 2.Set environment variables
 ```
-$source /ros2_foxy/install/setup.bash
+$source /ros2_galactic/install/setup.bash
+$source /perf_test_ws/install/setup.bash
 ```
 3.Build
 ```
