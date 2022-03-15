@@ -19,7 +19,7 @@ git clone https://github.com/azu-lab/rosbag2_evaluation.git
 2.Rewrite .cpp script from original script
 - "ros2_galactic/src/ros2/rosbag2/rosbag2_transport/src/rosbag2_transport/player.cpp" -> "rosbag2_evaluation/cpp_scripts/player.cpp"
 - "perf_test_ws/src/performance_test/performance_test/src/communication_abstractions/rclcpp_communicator.hpp" -> "rosbag2_evaluation/cpp_scripts/rclcpp_communicator.hpp"
--"perf_test_ws/src/performance_test/performance_test/src/outputs/stdout_output.cpp" -> "rosbag2_evaluation/cpp_scripts/stdout_output.cpp"
+- "perf_test_ws/src/performance_test/performance_test/src/outputs/stdout_output.cpp" -> "rosbag2_evaluation/cpp_scripts/stdout_output.cpp"
 ## Build
 1.Set environment variables
 ```
