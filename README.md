@@ -43,7 +43,7 @@ Build ROS 2 galactic
 ```
 cd /ros2_galactic
 ```
-if build of ros2_galactic is complete, 
+If the package build is complete except for rosbag2_transport 
 ```
 colcon build --packages-select rosbag2_transport
 ```
