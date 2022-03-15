@@ -55,7 +55,7 @@ colcon build
 ## Evaluation
 1.Set evaluation parameters
 
-Open a yaml file ("rosbag2_evaluation/src/rosbag2_evaluation_parameters.yaml") and set parameters enclosed in [].
+Open a yaml file ("rosbag2_evaluation/src/rosbag2_evaluation_parameters.yaml") and set parameters enclosed in commented out [].
 - **fixed** : don't change these parameters.
 - **free** : you can set an integer value you like.
 - **"free",...** : you can set some interger values you like (for dds, you can set RMW_IMPLEMENTATION parameters. This package implements only rmw_cyclonedds_cpp and rmw_fastrtps_cpp).
