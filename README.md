@@ -16,9 +16,11 @@ Therefore, they need to be rewritten from the original scripts.
 git clone https://github.com/azu-lab/rosbag2_evaluation.git
 ```
 
-2.Rewrite .cpp script from original script  
+2.Rewrite .cpp script from original script
+
 ROS 2 galactic
-- "ros2_galactic/src/ros2/rosbag2/rosbag2_transport/src/rosbag2_transport/player.cpp" -> "rosbag2_evaluation/cpp_scripts/player.cpp"  
+- "ros2_galactic/src/ros2/rosbag2/rosbag2_transport/src/rosbag2_transport/player.cpp" -> "rosbag2_evaluation/cpp_scripts/player.cpp" 
+- 
 performance_test
 - "perf_test_ws/src/performance_test/performance_test/src/communication_abstractions/rclcpp_communicator.hpp" -> "rosbag2_evaluation/cpp_scripts/rclcpp_communicator.hpp"
 - "perf_test_ws/src/performance_test/performance_test/src/outputs/stdout_output.cpp" -> "rosbag2_evaluation/cpp_scripts/stdout_output.cpp"
