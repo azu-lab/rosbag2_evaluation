@@ -33,13 +33,13 @@ performance_test
 
 1.Rebuild
 
-Rebuild the performance_test
+performance_test
 ```
 cd perf_test_ws/
 colcon build
 ```
 
-Rebuild ROS 2 galactic
+ROS 2 galactic
 ```
 cd ros2_galactic/
 colcon build --packages-select rosbag2_transport
@@ -73,7 +73,7 @@ python3 eval_rosbag2.py
 2.Jitter
 
 Jitter of rosbag2 is visualizing by R scripts (for exmaple, "rosbag2_evaluation/src/boxplot_for_thesis/basic/basic_dds_r_20.r").
-If you want to run R scripts in this package, you must change output data paths refferenced in R scripts.
+If you want to run R scripts in this package, you must **[install R][4] and change output data paths** refferenced in R scripts.
 
 Output datas by rosbag2_evaluation are placed in [GoogleDrive][3].
 Output datas must be placed in "rosbag2_evaluation/src/".
@@ -81,3 +81,4 @@ Output datas must be placed in "rosbag2_evaluation/src/".
 [1]:https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
 [2]:https://gitlab.com/ApexAI/performance_test
 [3]:https://drive.google.com/file/d/1rf3QdKASaFHtoBIjgvooUg3sdyv96l7A/view?usp=sharing
+[4]:https://cloud.r-project.org/
