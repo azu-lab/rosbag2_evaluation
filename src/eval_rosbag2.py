@@ -6,12 +6,12 @@ import datetime
 import signal
 import statistics
 
-import generate_cmd as gc # 
-import get_bagfile_data as gbd # 
-import make_messageloss_latextable as mml # 
-import message_loss_distribution as mld # 
-import calc_record_jitter as crj # 
-import calc_play_jitter as cpj # 
+import generate_cmd as gc
+import get_bagfile_data as gbd  
+import make_messageloss_latextable as mml  
+import message_loss_distribution as mld 
+import calc_record_jitter as crj 
+import calc_play_jitter as cpj 
 
 # Evaluation start time
 start = datetime.datetime.now()
@@ -88,11 +88,14 @@ def create_play_time_txt():
         with open(f'{play_output_dir}/play_time.txt', 'w') as f:
             subprocess.run(play_cmd, shell=True,encoding='UTF-8', stdout=f,universal_newlines=True)
         time.sleep(1)
-        # Pass the path where record_time.txt and play_time.txt are located, and caluculate jitter
+        # Pass the path where record_time.txt and play_time.txt are located, and caluculate jitter.
         cpj.calc_jitter(time_output_dir,play_output_dir)
     print("@ play_time.txt @")
 
 def create_perf_test_time_for_jitter_txt():
+    """
+    Write the data in the same line as the id of the data stored in bagfile to perf_test_time_for_jitter.txt.
+    """
     bagfile_path = time_output_dir + "/bagfile"
     dbpath = bagfile_path + "/bagfile_0.db3"
     with open(f'{time_output_dir}/perf_test_time_for_jitter.txt','w') as ffp:
