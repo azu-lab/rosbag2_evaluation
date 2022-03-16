@@ -1,5 +1,4 @@
 import subprocess
-import sqlite3
 import os
 import shutil
 import time
@@ -7,24 +6,23 @@ import datetime
 import signal
 import statistics
 
-import generate_cmd as gc
-import get_bagfile_data as gbd
-import make_messageloss_latextable as mml
-import message_loss_distribution as mld
-import calc_jitter as cj
-import calc_play_jitter as cpj
+import generate_cmd as gc # 
+import get_bagfile_data as gbd # 
+import make_messageloss_latextable as mml # 
+import message_loss_distribution as mld # 
+import calc_record_jitter as crj # 
+import calc_play_jitter as cpj # 
 
-#Evaluation start time
+# Evaluation start time
 start = datetime.datetime.now()
 
-#-----generate_cmd.pyから、必要なリストや値を取得-----
+# -----Get lists and datas from generate_cmd.py-----
 dt_str = gc.get_dt_str()
 perf_test_topics = gc.get_perf_test_topics()
 nd_mcs_spp_product = gc.get_nd_mcs_spp_product()
 play_path_list = gc.get_play_path_list()
 play_cmd_list = gc.get_play_cmd_list()
 rate_d_r_dds_product = gc.get_rate_d_r_dds_product()
-repeat_count = 1
 num_of_repeat = gc.get_num_of_repeat()
 
 def exec_run_perf_test_and_rosbag2_record(nd_mcs_spp,topic,l_param):
@@ -40,35 +38,48 @@ def exec_run_perf_test_and_rosbag2_record(nd_mcs_spp,topic,l_param):
     l_param : int
         Index of rate_d_r_dds_product indicating the parameters to be executed.
     """
-
-    #Pass parameters to be executed and output results storage location to run_perf_test_and_rosbag2_record.py 
-    #Manipulate output results with grep to output timestamps only
+    # Pass parameters to be executed and output results storage location to run_perf_test_and_rosbag2_record.py 
+    # Manipulate output results with grep to output timestamps only
     experiment_cmd = f"python3 run_perf_test_and_rosbag2_record.py {nd_mcs_spp} {topic} {l_param} {time_output_dir} | grep qqq.*"
     with open(f'{time_output_dir}/pub_time_before_del.txt','w') as f:
         subprocess.run(experiment_cmd,shell=True,stdout=f,encoding='UTF-8', universal_newlines=True)
 
 def create_perf_test_time_txt():
+    """
+    Remove specific strings for grep from pub_time_before_del.txt
+    """
     before_delete = []
     after_delete = []
     with open(f'{time_output_dir}/pub_time_before_del.txt','r') as f:
         before_delete = f.readlines()
+        # Remove specific strings (qqq).
         for k in range(len(before_delete)):
             after_delete.append(before_delete[k][3:-1])
-    os.remove(f'{time_output_dir}/pub_time_before_del.txt') #使用済みなので、容量確保のため削除
+    # Delete pub_time_before_del.txt because it has been used.
+    os.remove(f'{time_output_dir}/pub_time_before_del.txt')
+    # Write to perf_test_time.txt.
     with open(f'{time_output_dir}/perf_test_time.txt','w') as f:
         d = "\n".join(after_delete)
         f.write(d)
     print("@ perf_test_time.txt @")
 
 def create_record_time_txt():
+    """
+    Get timestamps from bagfile and write them to record_time.txt.
+    """
     dbpath = time_output_dir + "/bagfile/bagfile_0.db3"
     with open(f'{time_output_dir}/record_time.txt','w') as f:
+        # Get timestamps from get_bagfile_data.py.
         timestamp = gbd.get_record_timestamp(dbpath)
         for i in timestamp:
             f.write("%s\n" %i)
     print("@ record_time.txt @")
 
 def create_play_time_txt():
+    """
+    Launch rosbag2 play and create play_time.txt.
+    Then, calculate jitter of rosbag2 play.
+    """
     bagfile_path = time_output_dir + "/bagfile"
     for i in range(len(play_path_list)):
         play_cmd = f"ros2 bag play {play_cmd_list[i]} {bagfile_path}"
@@ -77,7 +88,8 @@ def create_play_time_txt():
         with open(f'{play_output_dir}/play_time.txt', 'w') as f:
             subprocess.run(play_cmd, shell=True,encoding='UTF-8', stdout=f,universal_newlines=True)
         time.sleep(1)
-        cpj.calc_jitter(time_output_dir,play_output_dir) #record_time.txtとplay_time.txtがあるパスを渡す
+        # Pass the path where record_time.txt and play_time.txt are located, and caluculate jitter
+        cpj.calc_jitter(time_output_dir,play_output_dir)
     print("@ play_time.txt @")
 
 def create_perf_test_time_for_jitter_txt():
@@ -163,7 +175,7 @@ for h in range(len(nd_mcs_spp_product)): # nd,mcs,spp
                 create_perf_test_time_for_jitter_txt()
                 
             print("-----Calculate message loss and jitter-----")
-            cj.calc_jitter("perf_test_time_for_jitter.txt","record_time.txt",time_output_dir)
+            crj.calc_jitter("perf_test_time_for_jitter.txt","record_time.txt",time_output_dir)
             #メッセージロスの平均を取り(四捨五入)m_loss_output_pathに出力
             ave_of_m_loss = round(statistics.mean(num_of_m_loss_list))
             num_of_m_loss_list = []

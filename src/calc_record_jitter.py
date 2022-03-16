@@ -1,19 +1,9 @@
-import matplotlib.pyplot as plt
 import generate_cmd as gc
+
 num_of_pub = gc.get_perf_test_num_of_publish()
 time_output_dir = ""
 prefile = "perf_test_time_for_jitter.txt"
 nextfile = "record_time.txt"
-
-def qSort(a):
-    if len(a) in (0, 1):
-        return a
-
-    p = a[-1]
-    l = [x for x in a[:-1] if x <= p]
-    r = [x for x in a[:-1] if x >  p]
-
-    return qSort(l) + [p] + qSort(r)
 
 
 def calc_jitter(prefile,nextfile,time_output_dir):
