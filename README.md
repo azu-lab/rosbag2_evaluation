@@ -7,10 +7,13 @@ Some scripts of ROS 2 galactic and performance_test have been modified to fit th
 Therefore, you need to rewrite from the original scripts to modified scripts.
 
 ## Requirements
+
+You must install the following two.
 - [ROS 2 galactic][1] (Ubuntu 20.04)
 - [performance_test][2]
 
 ## Rewrite scripts
+
 1.Clone the repository
 ```
 git clone https://github.com/azu-lab/rosbag2_evaluation.git
@@ -28,20 +31,20 @@ performance_test
 ## Build
 1.Set environment variables
 ```
-source /ros2_galactic/install/setup.bash
-source /perf_test_ws/install/setup.bash
+source ros2_galactic/install/setup.bash
+source perf_test_ws/install/setup.bash
 ```
 2.Build
 
 Build the performance_test
 ```
-cd /perf_test_ws
+cd perf_test_ws/
 colcon build
 ```
 
 Build ROS 2 galactic
 ```
-cd /ros2_galactic
+cd ros2_galactic/
 ```
 If the package build is complete except for rosbag2_transport 
 ```
@@ -64,7 +67,7 @@ Open a yaml file ("rosbag2_evaluation/src/rosbag2_evaluation_parameters.yaml") a
 
 
 ```
-cd /rosbag2_evaluation/src
+cd rosbag2_evaluation/src/
 python3 eval_rosbag2.py
 ```
 
