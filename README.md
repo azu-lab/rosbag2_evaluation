@@ -9,6 +9,7 @@ Therefore, you need to rewrite from the original scripts to modified scripts.
 ## Requirements
 
 You must install the following two.
+ROS 2 galactic must be installed at **source**, not binary.
 - [ROS 2 galactic][1] (Ubuntu 20.04)
 - [performance_test][2]
 
@@ -22,41 +23,36 @@ git clone https://github.com/azu-lab/rosbag2_evaluation.git
 2.Rewrite some scripts from original scripts
 
 ROS 2 galactic
-- "ros2_galactic/src/ros2/rosbag2/rosbag2_transport/src/rosbag2_transport/player.cpp" -> "rosbag2_evaluation/rewrite_scripts/player.cpp" 
+- "rosbag2_evaluation/rewrite_scripts/player.cpp" -> "ros2_galactic/src/ros2/rosbag2/rosbag2_transport/src/rosbag2_transport/player.cpp"
 
 performance_test
-- "perf_test_ws/src/performance_test/performance_test/src/communication_abstractions/rclcpp_communicator.hpp" -> "rosbag2_evaluation/rewrite_scripts/rclcpp_communicator.hpp"
-- "perf_test_ws/src/performance_test/performance_test/src/outputs/stdout_output.cpp" -> "rosbag2_evaluation/rewrite_scripts/stdout_output.cpp"
+- "rosbag2_evaluation/rewrite_scripts/rclcpp_communicator.hpp" -> "perf_test_ws/src/performance_test/performance_test/src/communication_abstractions/rclcpp_communicator.hpp"
+- "rosbag2_evaluation/rewrite_scripts/stdout_output.cpp" -> "perf_test_ws/src/performance_test/performance_test/src/outputs/stdout_output.cpp"
 
-## Build
-1.Set environment variables
-```
-source ros2_galactic/install/setup.bash
-source perf_test_ws/install/setup.bash
-```
-2.Build
+## Rebuild
 
-Build the performance_test
+1.Rebuild
+
+Rebuild the performance_test
 ```
 cd perf_test_ws/
 colcon build
 ```
 
-Build ROS 2 galactic
+Rebuild ROS 2 galactic
 ```
 cd ros2_galactic/
-```
-If the package build is complete except for rosbag2_transport 
-```
 colcon build --packages-select rosbag2_transport
 ```
-else
+
+2.Set environment variables
 ```
-colcon build
+source ros2_galactic/install/setup.bash
+source perf_test_ws/install/setup.bash
 ```
 
 ## Evaluation
-1.Set evaluation parameters
+1.Set evaluation parameters (optional)
 
 Open a yaml file ("rosbag2_evaluation/src/rosbag2_evaluation_parameters.yaml") and set parameters enclosed in commented out [].
 - **fixed** : don't change these parameters.
@@ -64,7 +60,6 @@ Open a yaml file ("rosbag2_evaluation/src/rosbag2_evaluation_parameters.yaml") a
 - **"free",...** : you can set some interger values you like (for dds, you can set RMW_IMPLEMENTATION parameters. This package implements only rmw_cyclonedds_cpp and rmw_fastrtps_cpp).
  
 2.Start rosbag2_evaluation
-
 
 ```
 cd rosbag2_evaluation/src/
