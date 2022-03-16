@@ -1,4 +1,3 @@
-import os
 import signal
 import subprocess
 import sys
@@ -24,8 +23,8 @@ num_of_publish = gc.get_perf_test_num_of_publish()
 rate = rate_d_r_dds_product[0]
 record_qos_d = rate_d_r_dds_product[1]
 record_qos_r = rate_d_r_dds_product[2]
-perf_qos_r = "reliable" #固定
-perf_qos_d = "transient" #固定
+perf_qos_r = "reliable" # fixed
+perf_qos_d = "transient" # fixed
 
 
 no_discovery = nd_mcs_spp_product[0]
@@ -60,10 +59,6 @@ record_cmd += record_cmd_option
 
 record_process = None
 
-done_experiment = False
-
-current_index = 0 #1回だけ実行
-
 class Instance:
     """perf_test process encapsulation."""
 
@@ -79,7 +74,7 @@ class Instance:
         global record_process
         if no_discovery == "true": #no discoveryがONなら、perf_testを先に起動し、トピックを作成、メッセージをパブリッシュするまでにレコードを起動
             self.process = subprocess.Popen(self.perf_cmd(), shell=True)
-            time.sleep(0.2)
+            time.sleep(0.2) # fixed
             record_process = subprocess.Popen(record_cmd,shell=True)
         else:
             record_process = subprocess.Popen(record_cmd,shell=True)
@@ -118,7 +113,7 @@ class Instance:
         if self.process is not None:
             self.process.kill()
 
-    def __del__(self):#デストラクタ
+    def __del__(self):
         """Kill the associated performance test process."""
         self.kill()
 
