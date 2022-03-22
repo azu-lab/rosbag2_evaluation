@@ -124,14 +124,14 @@ public:
       init_msg(m_data, time);
       increment_sent();  // We increment before publishing so we don't have to lock twice.
       unlock();
-      if (m_data.id == 1){
+
+      if (m_data.id == 1){ // Wait a moment before publishing begins (for when No Discovery is true).
         std::this_thread::sleep_for(std::chrono::milliseconds(400));
       }
-      if (m_data.id <= 2000) { //設定した回数までパブリッシュする
+      if (m_data.id <= 2000) { // Publish up to a set number of times.
         m_publisher->publish(m_data);
         auto nanosec_since_epoch = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-        printf("\nqqq%ld\n",nanosec_since_epoch); //grepで指定される文字列をヘッドに追加し時刻を出力
-        // printf("\nqqq%ld:%ld\n",nanosec_since_epoch,m_data.id);
+        printf("\nqqq%ld\n",nanosec_since_epoch); // Add the string specified by grep to the head and output the time.
       }
     }
   }
