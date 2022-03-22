@@ -4,20 +4,34 @@ import sys
 import generate_cmd as gc
 import time
 
-#max cache sizeの目安サイズ(1秒のレコードサイズ⇨topicサイズ*rate)
-def max_cache_size_rule_of_thumb(topic,rate):
+def approximate_max_cache_size(topic,rate):
+    """
+    Calculate approximate of Max Cache Size (record size in 1 second:topic size*rate).
+
+    Parameters
+    ----------
+    topic : string
+    rate : string
+
+    Returns
+    ----------
+    approximate_mcs : int
+        Approximate size of Max Cache Size parameter.
+    """
+    # Create the dictionary
     mcs_dic = {"Array1k":1044,"Array4k":4116,"Array16k":16404,"Array32k":32768,"Array64k":65556,"Array256k":262164,"Array1m":1048596,"Array2m":2097172,
     "Struct256":532,"Struct4k":8468,"Struct32k":67732,"PointCloud512k":526740,"PointCloud1m":1051028,"PointCloud2m":2099604,"PointCloud4m":4196756,
     "Range":308,"NavSatFix":396,"RadarDetection":84,"RadarTrack":844}
-    mcs_rule_of_thumb = mcs_dic[topic]*int(rate)
-    return mcs_rule_of_thumb
+    approximate_mcs = mcs_dic[topic]*int(rate)
 
-#eval.pyでこのプログラムを実行する際のコマンドライン引数を取得
-nd_mcs_spp_product = list(gc.get_nd_mcs_spp_product()[int(sys.argv[1])]) #argv[1]番目のnd_mcs_sppのパラメータ
-topic = gc.get_perf_test_topics()[int(sys.argv[2])] #argv[2]番目のtopic
-rate_d_r_dds_product = list(gc.get_rate_d_r_dds_product()[int(sys.argv[3])]) # argv[3]番目のlatexのパラメータ(Rate,durability,reliability,DDS)
+    return approximate_mcs
+
+# Get command line arguments for executing this program in eval_rosbag2.py.
+nd_mcs_spp_product = list(gc.get_nd_mcs_spp_product()[int(sys.argv[1])]) # Parameters of argv[1]th nd_mcs_spp.
+topic = gc.get_perf_test_topics()[int(sys.argv[2])] # Parameters of argv[2]th topic.
+rate_d_r_dds_product = list(gc.get_rate_d_r_dds_product()[int(sys.argv[3])]) # Parameters of argv[3]th rate_d_r_dds.
 output_path = sys.argv[4]
-bagfile_path = output_path + "/bagfile" #argv[4]のパスにbagfileを作成
+bagfile_path = output_path + "/bagfile" # Create bagfile in the path of argv[4].
 num_of_publish = gc.get_perf_test_num_of_publish()
 
 rate = rate_d_r_dds_product[0]
@@ -31,7 +45,7 @@ no_discovery = nd_mcs_spp_product[0]
 max_cache_size = nd_mcs_spp_product[1]
 storage_preset_profile = nd_mcs_spp_product[2]
 
-#recordコマンドを作成
+# Create record commands.
 record_nd_cmd = ""
 record_mcs_cmd = ""
 base_spp_cmd = ""
@@ -42,9 +56,9 @@ record_cmd = ""
 if no_discovery == "true":
     record_nd_cmd = "--no-discovery"
 
-if max_cache_size == "guide": #mcsを目安にする(topicサイズ*rate)
-    mcs_rule_of_thumb = max_cache_size_rule_of_thumb(topic,rate)
-    record_mcs_cmd = f"--max-cache-size {mcs_rule_of_thumb}"
+if max_cache_size == "guide": 
+    approximate_mcs = approximate_max_cache_size(topic,rate)
+    record_mcs_cmd = f"--max-cache-size {approximate_mcs}"
 elif max_cache_size == "default":
     record_mcs_cmd = ""
 else:
@@ -63,27 +77,32 @@ class Instance:
     """perf_test process encapsulation."""
 
     def __init__(self):
-        """
-        Construct the object.
-        
-        :param operation_type: Type of the operation
-        """
         self.process = None
 
     def run(self):
+        """
+        Run perf_test and rosbag2 record.
+        """
         global record_process
-        if no_discovery == "true": #no discoveryがONなら、perf_testを先に起動し、トピックを作成、メッセージをパブリッシュするまでにレコードを起動
+        # If no discovery is true, then perf_test is launched first and the topic is created. 
+        # Start the record before publishing the message.
+        if no_discovery == "true": 
             self.process = subprocess.Popen(self.perf_cmd(), shell=True)
             time.sleep(0.2) # fixed
             record_process = subprocess.Popen(record_cmd,shell=True)
         else:
             record_process = subprocess.Popen(record_cmd,shell=True)
             self.process = subprocess.Popen(self.perf_cmd(), shell=True)
-        # record_process = subprocess.Popen(record_cmd,shell=True)
-        # time.sleep(0.1)
-        # self.process = subprocess.Popen(self.perf_cmd(), shell=True)
 
     def perf_cmd(self):
+        """
+        Create perf_test executing command.
+
+        Returns
+        -----------
+        perf_test_cmd : string
+            Command to execute perf_test node.
+        """
         command = 'ros2 run performance_test perf_test'
         pubs_args = ' -p 1 '
 
@@ -98,34 +117,44 @@ class Instance:
             perf_test_qos_d = "--transient"
         dyn_args = f" --msg {topic} --topic {topic_name} --rate {rate} -s 0 {perf_test_qos_r} {perf_test_qos_d}"
 
-        print('*********perf_test_command**********')
-        print(command + ' ' + fixed_args + dyn_args + pubs_args)
+        perf_test_cmd = command + ' ' + fixed_args + dyn_args + pubs_args
 
-        #recordコマンド
+        print('*********perf_test_command**********')
+        print(perf_test_cmd)
         print('*********record_command**********')
         print(record_cmd)
         print('*******************')
-
-        return command + ' ' + fixed_args + dyn_args + pubs_args
+        
+        return perf_test_cmd
 
     def kill(self):
-        """Kill the associated performance test process."""
+        """
+        Kill the associated performance test process.
+        """
         if self.process is not None:
             self.process.kill()
 
     def __del__(self):
-        """Kill the associated performance test process."""
+        """
+        Kill the associated performance test process.
+        """
         self.kill()
 
 
 def signal_handler(sig, frame):
-    """Signal handler to handle Ctrl-C."""
+    """
+    Signal handler to handle Ctrl-C.
+    """
     print('You pressed Ctrl+C! Terminating experiment')
     subprocess.Popen('killall -2 perf_test', shell=True)
     subprocess.Popen('killall -2 ros2 bag record', shell=True)
     sys.exit(0)
 
 def evaluation_stop(sig=None, frame=None):
+    """
+    Stop rosbag2 evaluation.
+    This method is called after experiment_length seconds.
+    """
     publisher.kill()
     subprocess.Popen('killall -2 perf_test', shell=True)
     subprocess.Popen('killall -2 ros2', shell=True)
@@ -134,13 +163,14 @@ def evaluation_stop(sig=None, frame=None):
 
 
 
-#(パブリッシュ回数/rate)+数秒、perf_test,rosbag2 recordを実行する
+# Execute perf_test and rosbag2 record for (num_of_publish/rate) + a few seconds.
 experiment_length = (num_of_publish/int(rate)) + 5
 interval = 3
 
+# Kill node after experiment_length seconds.
 signal.signal(signal.SIGALRM, evaluation_stop)
 signal.signal(signal.SIGINT, signal_handler)
-signal.setitimer(signal.ITIMER_REAL, experiment_length, interval) #experiment_length秒後にノードをkillする
+signal.setitimer(signal.ITIMER_REAL, experiment_length, interval) 
 
 count = 1
 publisher = Instance()

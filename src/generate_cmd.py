@@ -13,7 +13,9 @@ with open('rosbag2_evaluation_parameters.yaml', 'r') as yaml_file:
                                 ['ros__parameters'])
 
 dds_of_eval = eval_cfg['dds'] # RMW_IMPLEMENTATION
+time_output_root_dir = eval_cfg['time_output_root_dir'] # Path of the directory where evaluation results (timestamps and calculation results) are stored.
 num_of_repeat = eval_cfg['repeat'] # Number of iterations of the same parameter.
+threshold_rate = eval_cfg['threshold_rate'] # Threshold rate of caluclating jitter.
 
 #-----perf_test parameter-----
 perf_test_params = eval_cfg['perf_test_parameters']
@@ -80,8 +82,12 @@ rate_d_r_dds_ary.append(dds_of_eval)
 
 def get_dt_str():
     return dt_str
+def get_time_output_root_dir():
+    return time_output_root_dir
 def get_num_of_repeat():
     return num_of_repeat
+def get_threshold_rate():
+    return threshold_rate
 
 #perf_test
 def get_perf_test_topics():

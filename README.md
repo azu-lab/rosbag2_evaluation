@@ -70,9 +70,12 @@ python3 eval_rosbag2.py
 ## Visualize
 1.Message loss
 
+Message loss results of rosbag2 record are visualizing by LaTeX table.
+They are in number_of_message_loss directory.
+
 2.Jitter
 
-Jitter of rosbag2 is visualizing by R scripts (for exmaple, "rosbag2_evaluation/src/boxplot_for_thesis/basic/basic_dds_r_20.r").
+Jitter results of rosbag2 are visualizing by R scripts (for exmaple, "rosbag2_evaluation/src/boxplot_for_thesis/basic/basic_dds_r_20.r").
 If you want to run R scripts in this package, you must **[install R][4] and change output data paths** refferenced in R scripts.
 
 Output datas by rosbag2_evaluation are placed in [GoogleDrive][3].

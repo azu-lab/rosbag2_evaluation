@@ -1,20 +1,31 @@
 import generate_cmd as gc
+
 num_of_publish = gc.get_perf_test_num_of_publish()
-def message_loss_dist(id_list,r,output_path,topic):
-    #配列の値のr毎の個数を求める
-    with open(f"{output_path}",'a') as f:
+
+def message_loss_dist(id_list,dist,output_file,topic):
+    """
+    Find the number of message loss per dist.
+
+    Parameters
+    ----------
+    id_list : list
+        list of id in data.
+    dist : int
+        Threshold for determining the distribution of message loss.
+    output_file : string
+        File name where information of message loss distribution is output.
+    topic : string
+        Topic parameter.
+    """
+    with open(f"{output_file}",'a') as f:
         if id_list == []:
-            print(f"{topic}:{num_of_publish}個全てロストした。",file=f)
+            print(f"{topic}:Lost all {num_of_publish}",file=f)
         else:
-            id_devide_by_num_of_pub = list(map(lambda x: -(-x//r), id_list)) #rで割り、切り上げる
+            # Divide by dist and round up.
+            id_devided_by_num_of_pub = list(map(lambda x: -(-x//dist), id_list)) 
             message_loss_count = []
-            for i in range(int(num_of_publish/r)): #パブリッシュ回数をrで割った回数、id_devide_by_num_of_pubの中のi+1の値(切り上げ後の値)の個数をカウントし,rから引きリストに追加
-                message_loss_count.append(r-id_devide_by_num_of_pub.count(i+1))
-            print(f"{topic}:{num_of_publish}回のパブリッシュの内、{r}毎のロスト数は{message_loss_count}",file=f)
-    # return id_devide_by_num_of_pub
-
-
-# print(4/3)
-# print(4//3)
-# a = [3,5,15,14,56,78,103] #0000112
-# message_loss_rate(a,50)
+            # Count the number of i+1 values in id_devided_by_num_of_pub by dividing the number of times published by dist.
+            # And add it to the list pulled from dist.
+            for i in range(int(num_of_publish/dist)): 
+                message_loss_count.append(dist - id_devided_by_num_of_pub.count(i+1))
+            print(f"{topic}:The number of message loss per {dist} in {num_of_publish} is {message_loss_count}.",file=f)

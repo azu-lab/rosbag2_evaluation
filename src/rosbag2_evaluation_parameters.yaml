@@ -1,7 +1,9 @@
 rosbag2_evaluation:
   ros__parameters:
     dds: ["rmw_cyclonedds_cpp"] # ["rmw_cyclonedds_cpp","rmw_fastrtps_cpp",...]
+    time_output_root_dir: "./time_output/1"
     repeat: 1 # free
+    threshold_rate: 0.7 # free
     perf_test_parameters:
       topics: ["Array1k"] # you can set the below configurations
       rate: ["30"] # ["free",...]

@@ -16,13 +16,16 @@ import calc_play_jitter as cpj
 # Evaluation start time
 start = datetime.datetime.now()
 
-# -----Get lists and datas from generate_cmd.py-----
+#-----Get lists and datas from generate_cmd.py-----
 dt_str = gc.get_dt_str()
 perf_test_topics = gc.get_perf_test_topics()
 nd_mcs_spp_product = gc.get_nd_mcs_spp_product()
 play_path_list = gc.get_play_path_list()
 play_cmd_list = gc.get_play_cmd_list()
 rate_d_r_dds_product = gc.get_rate_d_r_dds_product()
+
+time_output_root_dir = gc.get_time_output_root_dir()
+# time_output_root_dir = f"./time_output/{dt_str}"    
 num_of_repeat = gc.get_num_of_repeat()
 
 def exec_run_perf_test_and_rosbag2_record(nd_mcs_spp,topic,l_param):
@@ -46,18 +49,15 @@ def exec_run_perf_test_and_rosbag2_record(nd_mcs_spp,topic,l_param):
 
 def create_perf_test_time_txt():
     """
-    Remove specific strings for grep from pub_time_before_del.txt
+    Remove specific strings for grep from pub_time_before_del.txt.
     """
     before_delete = []
     after_delete = []
     with open(f'{time_output_dir}/pub_time_before_del.txt','r') as f:
         before_delete = f.readlines()
-        # Remove specific strings (qqq).
         for k in range(len(before_delete)):
-            after_delete.append(before_delete[k][3:-1])
-    # Delete pub_time_before_del.txt because it has been used.
-    os.remove(f'{time_output_dir}/pub_time_before_del.txt')
-    # Write to perf_test_time.txt.
+            after_delete.append(before_delete[k][3:-1]) # Remove specific strings (qqq).
+    os.remove(f'{time_output_dir}/pub_time_before_del.txt') # Delete pub_time_before_del.txt because it has been used.
     with open(f'{time_output_dir}/perf_test_time.txt','w') as f:
         d = "\n".join(after_delete)
         f.write(d)
@@ -103,28 +103,34 @@ def create_perf_test_time_for_jitter_txt():
         perf_time_before_row_delete = []
         with open(f'{time_output_dir}/perf_test_time.txt','r') as fp:
             perf_time_before_row_delete = fp.readlines()
-            id_list = gbd.get_record_id_list(dbpath) #recordされたメッセージのidのリストを取得
-            number_of_message_loss = len(perf_time_before_row_delete)-len(id_list) #ロストしたメッセージの個数を取得
+            id_list = gbd.get_record_id_list(dbpath) # Get an id list of recorded messages.
+            number_of_message_loss = len(perf_time_before_row_delete)-len(id_list) # Calculate message loss.
             num_of_m_loss_list.append(number_of_message_loss)
             if number_of_message_loss >= 1:
-                mld.message_loss_dist(id_list,500,m_loss_dist_output_path,topic) #ロストしていたら、1000毎のロスト数を計算し、m_loss_dist_output_dirに出力
+                # Calculate the number of lost for each certain number and output to m_loss_dist_output_dir.
+                mld.message_loss_dist(id_list,500,m_loss_dist_output_file,topic) 
             for i in range(len(id_list)):
-                perf_time_after_row_delete.append(perf_time_before_row_delete[id_list[i]-1]) #id_listの要素の箇所だけをperf_test_time.txtから取得する
+                # Retrieve only the rows of the elements in the id_list from perf_test_time.txt.
+                perf_time_after_row_delete.append(perf_time_before_row_delete[id_list[i]-1])
         for i in perf_time_after_row_delete:
             ffp.write("%s" %i)
     print("@ perf_test_time_for_jitter.txt @")
-    shutil.rmtree(bagfile_path) #容量のため、bagfileを削除
+    shutil.rmtree(bagfile_path) # Delete bagfile because it has been used.
     print("@ delete the bagfile @")
-    time.sleep(2)
+    # time.sleep(2)
 
 def output_message_loss_result(num_of_message_loss,output_path):
+    """
+    Write the number of message loss to /number_of_message_loss/(topic).txt.
+    """
     output_text = f"{num_of_message_loss}"
     with open(f'{output_path}','a') as f:
-        #ロストしたメッセージの個数を、time_output/number_of_message_loss/nd,mcs,spp,topic.txtに出力
         print(f"{output_text}",file=f)
 
 def signal_handler(sig, frame):
-    """Signal handler to handle Ctrl-C."""
+    """
+    Signal handler to handle Ctrl-C.
+    """
     print('@@@@@ You pressed Ctrl+C. Terminating rosbag2 experiment @@@@@')
     subprocess.Popen('killall -9 perf_test', shell=True)
     subprocess.Popen('killall -2 ros2', shell=True)
@@ -132,11 +138,10 @@ def signal_handler(sig, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
-#----------評価を行う----------
+#----------Conduct evaluation----------
 
-num_of_m_loss_list = [] #メッセージロスを格納しておく配列
-time_output_root_dir = f"./time_output/{dt_str}"
-# time_output_root_dir = "./time_output_play"    
+num_of_m_loss_list = [] # Array to store message loss.
+
 for h in range(len(nd_mcs_spp_product)): # nd,mcs,spp
     nd_mcs_spp_param = list(nd_mcs_spp_product[h])
     nd = nd_mcs_spp_param[0]
@@ -150,44 +155,42 @@ for h in range(len(nd_mcs_spp_product)): # nd,mcs,spp
             durability = l_param[1]
             reliability = l_param[2]
             dds = l_param[3]
-            os.environ["RMW_IMPLEMENTATION"] = dds #DDS環境変数の変更
+            os.environ["RMW_IMPLEMENTATION"] = dds # Change RMW_IMPLEMENTATION.
 
-            #----------データを出力するパス設定----------
-            #時刻データを出力するパス
+            #----------Path setting to output data----------
+            # Path to output timestamps data.
             time_output_dir = f"{time_output_root_dir}/nd={nd}_mcs={mcs}_spp={spp}/{topic}_rate={rate}/QoS={durability},{reliability}_DDS={dds}"
-            # time_output_dir = f"./time_output/nd={nd}_mcs={mcs}_spp={spp}/{topic}_rate={rate}/QoS={durability},{reliability}_DDS={dds}"
             os.makedirs(time_output_dir,exist_ok=True)
-            #メッセージロスの数を出力するファイルパス
+            # Paths to output message loss data.
             m_loss_output_dir = f'{time_output_root_dir}/nd={nd}_mcs={mcs}_spp={spp}/number_of_message_loss'
             m_loss_output_path = f"{m_loss_output_dir}/{topic}.txt"
             os.makedirs(m_loss_output_dir,exist_ok=True)
             m_loss_dist_output_dir = f"{m_loss_output_dir}/dist/{dds},{rate},{reliability},{durability}"
             os.makedirs(m_loss_dist_output_dir,exist_ok=True)
-            m_loss_dist_output_path = f"{m_loss_dist_output_dir}/{topic}.txt"
+            m_loss_dist_output_file = f"{m_loss_dist_output_dir}/{topic}.txt"
 
-            for k in range(num_of_repeat):               #同パラメータの繰り返し(メッセージロス用)
-                #----------評価関数を実行----------
+            for k in range(num_of_repeat): # Repeat the same parameter (for message loss).
+                #----------Execute evaluation methods----------
                 print(f"-----Parameter execution ({k+1})-----\ncommunication:[{dds},{reliability},{durability}]\nperf_test:[{rate},{topic}]\nrosbag2 record:{nd_mcs_spp_param}")
                 print("-----Execute perf_test,rosbag2 record-----")
                 exec_run_perf_test_and_rosbag2_record(h,i,j)
                 print("-----Create a file containing timestamps.-----")
                 create_perf_test_time_txt()
                 create_record_time_txt()
-                #メッセージロスをnum_m_loss_listに保存。ジッタ計算用の時刻txtを作成
-                # create_play_time_txt()
+                create_play_time_txt() # Comment out if you only want to measure rosbag2 record.
                 create_perf_test_time_for_jitter_txt()
                 
             print("-----Calculate message loss and jitter-----")
-            crj.calc_jitter("perf_test_time_for_jitter.txt","record_time.txt",time_output_dir)
-            #メッセージロスの平均を取り(四捨五入)m_loss_output_pathに出力
+            crj.calc_jitter(time_output_dir)
+            # Take average of message loss (rounding) and output to m_loss_output_path.
             ave_of_m_loss = round(statistics.mean(num_of_m_loss_list))
             num_of_m_loss_list = []
             output_message_loss_result(ave_of_m_loss,m_loss_output_path)
-    #latexの表を作成
+    # Create a message loss table (latex).
     mml.make_latextable(nd_mcs_spp_param,m_loss_output_dir)
     print("Create message loss table")
 
-#評価にかかった時間を出力
+# Output the time taken for evaluation.
 end = datetime.datetime.now()
 evaluation_time = end - start
 print(f"Evaluation time is {evaluation_time}")
