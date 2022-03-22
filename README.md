@@ -81,6 +81,12 @@ If you want to run R scripts in this package, you must **[install R][4] and chan
 Output datas by rosbag2_evaluation are placed in [GoogleDrive][3].
 Output datas must be placed in "rosbag2_evaluation/src/".
 
+## Future work
+It is important to be able to set A in B.
+Therefore, the performance_test package should be edited to allow the number of publish to be used as a new argument.
+
+The R script code is verbose, so this can also be done in a simplified manner.
+
 [1]:https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
 [2]:https://gitlab.com/ApexAI/performance_test
 [3]:https://drive.google.com/file/d/1rf3QdKASaFHtoBIjgvooUg3sdyv96l7A/view?usp=sharing
