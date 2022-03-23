@@ -22,12 +22,14 @@ git clone https://github.com/azu-lab/rosbag2_evaluation.git
 
 2.Rewrite some scripts from original scripts
 
+The bold text below indicates the files for each user's ROS 2 galactic and performance_test environment.
+
 ROS 2 galactic
-- "rosbag2_evaluation/rewrite_scripts/player.cpp" -> "ros2_galactic/src/ros2/rosbag2/rosbag2_transport/src/rosbag2_transport/player.cpp"
+- "rosbag2_evaluation/rewrite_scripts/player.cpp" -> **"ros2_galactic/src/ros2/rosbag2/rosbag2_transport/src/rosbag2_transport/player.cpp"**
 
 performance_test
-- "rosbag2_evaluation/rewrite_scripts/rclcpp_communicator.hpp" -> "perf_test_ws/src/performance_test/performance_test/src/communication_abstractions/rclcpp_communicator.hpp"
-- "rosbag2_evaluation/rewrite_scripts/stdout_output.cpp" -> "perf_test_ws/src/performance_test/performance_test/src/outputs/stdout_output.cpp"
+- "rosbag2_evaluation/rewrite_scripts/rclcpp_communicator.hpp" -> **"perf_test_ws/src/performance_test/performance_test/src/communication_abstractions/rclcpp_communicator.hpp"**
+- "rosbag2_evaluation/rewrite_scripts/stdout_output.cpp" -> **"perf_test_ws/src/performance_test/performance_test/src/outputs/stdout_output.cpp"**
 
 ## Rebuild
 
